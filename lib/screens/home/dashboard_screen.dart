@@ -10,6 +10,7 @@ import '../../utils/app_theme.dart';
 import '../../utils/constants.dart';
 import '../profile/profile_screen.dart';
 import '../notifications/notifications_screen.dart';
+import '../maintenance/maintenance_list_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -454,10 +455,31 @@ class _DashboardHome extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 8),
-                      Text(
-                        'Please add vehicle information from Settings',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        textAlign: TextAlign.center,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                        child: Text(
+                          'Please add your vehicle information to start tracking maintenance and receive sensor notifications',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => const ProfileScreen(),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.add),
+                        label: const Text('Add Vehicle Information'),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 12,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -654,7 +676,85 @@ class _DashboardHome extends StatelessWidget {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 24),
                   ],
+
+                  // Quick Actions Section
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.primaryColor.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Icon(
+                                  Icons.dashboard_customize,
+                                  color: AppTheme.primaryColor,
+                                  size: 20,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                'Quick Actions',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppTheme.primaryColor,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          // Maintenance Records Button
+                          _buildQuickActionButton(
+                            context,
+                            icon: Icons.build,
+                            title: 'Maintenance Records',
+                            subtitle: 'Add and manage maintenance records',
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const MaintenanceListScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 12),
+                          // Vehicle Information Button
+                          _buildQuickActionButton(
+                            context,
+                            icon: Icons.directions_car,
+                            title: 'Vehicle Information',
+                            subtitle: 'Edit vehicle details',
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const ProfileScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               );
             },
@@ -1268,6 +1368,71 @@ class _DashboardHome extends StatelessWidget {
               ),
         ),
       ],
+    );
+  }
+
+  Widget _buildQuickActionButton(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppTheme.backgroundColor,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: AppTheme.primaryColor.withOpacity(0.2),
+            width: 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppTheme.primaryColor.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(
+                icon,
+                color: AppTheme.primaryColor,
+                size: 24,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: AppTheme.textSecondary,
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.chevron_right,
+              color: AppTheme.textSecondary,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

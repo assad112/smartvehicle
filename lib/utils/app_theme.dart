@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Colors
@@ -45,7 +44,7 @@ class AppTheme {
         foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: GoogleFonts.cairo(
+        titleTextStyle: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
           color: Colors.white,
@@ -66,7 +65,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          textStyle: GoogleFonts.cairo(
+          textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -93,42 +92,41 @@ class AppTheme {
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
-      textTheme: TextTheme(
-        displayLarge: GoogleFonts.cairo(
+      textTheme: const TextTheme(
+        displayLarge: TextStyle(
           fontSize: 32,
           fontWeight: FontWeight.bold,
           color: textPrimary,
         ),
-        displayMedium: GoogleFonts.cairo(
+        displayMedium: TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.bold,
           color: textPrimary,
         ),
-        displaySmall: GoogleFonts.cairo(
+        displaySmall: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
           color: textPrimary,
         ),
-        headlineMedium: GoogleFonts.cairo(
+        headlineMedium: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: textPrimary,
         ),
-        titleLarge: GoogleFonts.cairo(
+        titleLarge: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
           color: textPrimary,
         ),
-        bodyLarge: GoogleFonts.cairo(
+        bodyLarge: TextStyle(
           fontSize: 16,
           color: textPrimary,
         ),
-        bodyMedium: GoogleFonts.cairo(
+        bodyMedium: TextStyle(
           fontSize: 14,
           color: textSecondary,
         ),
       ),
-      fontFamily: GoogleFonts.cairo().fontFamily,
     );
   }
 }
